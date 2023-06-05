@@ -27,7 +27,7 @@ class SwarmInfra(core.Stack):
             cidr=vpc_cidr,
             nat_gateways=1,
             subnet_configuration=[ec2.SubnetConfiguration(name="Swarm-Public",subnet_type=ec2.SubnetType.PUBLIC),
-            ec2.SubnetConfiguration(name="Swarm-Private",subnet_type=ec2.SubnetType.PRIVATE)]
+            ec2.SubnetConfiguration(name="Swarm-Private",subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT)]
             )
 
         # Output the S3 Bucket name for the Swarm ZIP file

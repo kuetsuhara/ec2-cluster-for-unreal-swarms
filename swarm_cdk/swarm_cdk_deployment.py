@@ -16,7 +16,7 @@ class SwarmDeployment(core.Stack):
         super().__init__(scope, id, **kwargs)
 
         publicsubnets = vpc.select_subnets(subnet_type=ec2.SubnetType.PUBLIC)
-        privatesubnets = vpc.select_subnets(subnet_type=ec2.SubnetType.PRIVATE)
+        privatesubnets = vpc.select_subnets(subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT)
 
         # Custom policy to allow writes to S3 bucket for 
         
@@ -30,7 +30,7 @@ class SwarmDeployment(core.Stack):
         writelogsdocument.add_statements(writelogspolicy)
 
         # Instance Role and SSM Managed Policy
-        role = iam.Role(self, "SwarmInstanceRole", assumed_by=iam.ServicePrincipal("ec2.amazonaws.com"), inline_policies=[writelogsdocument])
+        role = iam.Role(self, "SwarmInstanceRole", assumed_by=iam.ServicePrincipal("ec2.amazonaws.com"), inline_policies={'writelogsdocument': writelogsdocument})
 
         role.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("service-role/AmazonSSMManagedInstanceCore"))
         role.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("EC2InstanceProfileForImageBuilder"))
@@ -142,7 +142,7 @@ class SwarmDeployment(core.Stack):
             instance_type=ec2.InstanceType(coordinator_instancy_type),
             machine_image=swarmami,
             vpc = vpc,
-            vpc_subnets = ec2.SubnetSelection(subnet_type=ec2.SubnetType('PRIVATE')),
+            vpc_subnets = ec2.SubnetSelection(subnet_type=ec2.SubnetType('PRIVATE_WITH_NAT')),
             role = role,
             security_group=securitygroup,
             user_data=ec2.UserData.custom(coorduserdata)

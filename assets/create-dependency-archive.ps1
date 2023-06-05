@@ -6,7 +6,7 @@
 
 # Your Unreal Engine 4 root folder
 # Change this according to your location and version
-$ue4root = 'C:\Program Files\Epic Games\UE_4.25'
+$ue4root = 'C:\Program Files\Epic Games\UE_4.27'
 
 # Where we are going to store the archive into your Documents folder
 $ue4SwarmArchive = "ue4-swarm-archive"
