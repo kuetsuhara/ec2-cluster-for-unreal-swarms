@@ -6,7 +6,7 @@
 
 # Your Unreal Engine 4 root folder
 # Change this according to your location and version
-$ue4root = 'C:\Program Files\Epic Games\UE_4.27'
+$ue4root = 'C:\Program Files\Epic Games\UE_5.2'
 
 # Where we are going to store the archive into your Documents folder
 $ue4SwarmArchive = "ue4-swarm-archive"
@@ -22,7 +22,7 @@ $swarmfiles += "SwarmInterface.dll","UnrealControls.dll"
 $swarmfiles | Foreach-Object { $swarmPaths += $ue4swarmpath + '\' + $_  }
 
 # Path to UE4PrereqSetup
-$ue4prereq = $ue4root + "\Engine\Extras\Redist\en-us\UE4PrereqSetup_x64.exe"
+$ue4prereq = $ue4root + "\Engine\Extras\Redist\en-us\UEPrereqSetup_x64.exe"
 $compressPaths = @()
 $compressPaths = $swarmPaths + $ue4prereq
 Compress-Archive -LiteralPath $compressPaths -DestinationPath $archivePath -Force
