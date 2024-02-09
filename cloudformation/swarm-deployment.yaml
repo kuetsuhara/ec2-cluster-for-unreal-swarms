@@ -162,7 +162,7 @@ Resources:
                       action: ExecutePowerShell
                       inputs:
                         commands: 
-                            - Start-Process -Wait -FilePath "C:\ue4-swarm\UE4PrereqSetup_x64.exe" -ArgumentList "/install /quiet"
+                            - Start-Process -Wait -FilePath "C:\ue4-swarm\UEPrereqSetup_x64.exe" -ArgumentList "/install /quiet"
                     - name: OpenFirewall
                       action: ExecutePowerShell
                       inputs:
